@@ -1,0 +1,51 @@
+the main recipe, British Pork Huntsman Pies:
+
+Serve with Pastry. : This calls the Pastry recipe, which handles all the input and processing.
+
+Serve with Filling. : This calls the Filling recipe, which handles printing the final output.
+
+This tells us we need to trace Pastry first, then see how Filling modifies its result.
+
+2. The Pastry Recipe (Input Loop)
+This is the main "for loop" of your program.
+
+The Loop: You have 13 teaspoons kosher salt. The loop is defined by Whisk the kosher salt. and Whisk the kosher salt until whisked.. The "until" clause specifies kosher salt, so this variable is decremented each loop.
+
+The Problem: This loop runs 13 times. Your input format SKY-CCCC-nnnn is 12 characters.
+
+The Key: This is a common technique. The loop will run 12 times, reading one character of your input each time. On the 13th iteration, the Take egg from refrigerator. command will find no more input (EOF) and will most likely set the egg variable to 0.
+
+This 13th run with egg = 0 does not correspond to an input character. It's used to set a final state or produce a value that isn't part of the main output.
+
+Inside the loop (for each of 13 runs):
+
+Take egg... : Reads one char (C) from input. (On run 13, C = 0).
+
+Put egg into 2nd mixing bowl. : Pushes C onto Stack 2.
+
+Add unsalted butter... : Adds 50 to C. Stack 2 now has [C + 50].
+
+Put all purpose flour... : Pushes 181. Stack 2 now has [181, C + 50].
+
+Serve with Meat Bread Layers. : This calls the main logic function, passing 181 and C + 50 as arguments. This function does a ton of work and, at its very end, pushes one resulting value onto the 1st mixing bowl (Stack 1).
+
+At the end of Pastry, Stack 1 contains 13 values, with the result of the 13th run (C=0) on top.
+
+Stack 1 = [F(0), F(n4), F(n3), F(n2), F(n1), F(C4), F(C3), F(C2), F(C1), F(-), F(Y), F(K), F(S)] (Where F(C) = MeatBreadLayers(181, C + 50) and F(0) is on top)
+
+3. The Filling Recipe (Output)
+This recipe is simple but crucial.
+
+Stir kosher salt into the 1st mixing bowl. : kosher salt is 12. This command "rolls" the top 12 items on Stack 1.
+
+The "Stir" (Roll) Operation: Stir 12 takes the top item, F(0), and moves it 12 positions down. It becomes the 12th item on the stack. The 13th item, F(S), is at the bottom and is never touched.
+
+Before Stir: [F(0), F(n4), F(n3), ..., F(K), F(S)]
+
+After Stir: [F(n4), F(n3), ..., F(K), F(0), F(S)]
+
+Liquefy contents... : Converts all 13 numbers to characters.
+
+Pour contents... into the 1st baking dish. : Moves the whole stack to the output.
+
+Serves 1. : Prints the entire 1st baking dish.
