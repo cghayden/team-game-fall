@@ -1,0 +1,3 @@
+Additional information for questions will be located in the ~/questions folder, which is also downloadable. You must XOR the text with the answer from the last question of each part to get the info.
+
+Port 3270 is the classic IBM 3270 terminal protocol (usually exposed as TN3270 — “Telnet 3270”). It’s the mainframe display/terminal protocol (screen-oriented, not a plain-line shell like SSH). You’ll need a 3270-capable client (x3270 / s3270 / tn3270) to get a proper terminal session.
